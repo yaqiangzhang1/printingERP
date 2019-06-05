@@ -99,7 +99,7 @@ public class DeptController extends BaseController {
         //缓存部门修改前详细信息
         Dept dept = deptService.getById(deptId);
         LogObjectHolder.me().set(dept);
-
+        System.out.println(dept.toString());
         return PREFIX + "dept_edit.html";
     }
 

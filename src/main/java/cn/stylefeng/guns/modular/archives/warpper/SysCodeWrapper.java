@@ -52,11 +52,10 @@ public class SysCodeWrapper extends BaseControllerWrapper {
     @Override
     protected void wrapTheMap(Map<String, Object> map) {
         Long pid = DecimalUtil.getLong(map.get("pid"));
-
         if (ToolUtil.isEmpty(pid) || pid.equals(0L)) {
-            map.put("pName", "--");
+            map.put("pName", "系统编码");
         } else {
-            map.put("pName", ConstantFactory.me().getDeptName(pid));
+            map.put("pName", ConstantFactory.me().getSimpleName(pid));
         }
     }
 }

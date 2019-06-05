@@ -58,8 +58,8 @@ public class SysCodeService extends ServiceImpl<SysCodeMapper, SysCode> {
      */
     @Transactional(rollbackFor = Exception.class)
     public void editSysCode(SysCode SysCode) {
-
-        if (ToolUtil.isOneEmpty(SysCode, SysCode.getCodeId(), SysCode.getSimpleName(), SysCode.getPid())) {
+        System.out.println(SysCode.toString());
+        if (ToolUtil.isOneEmpty(SysCode)) {
             throw new ServiceException(BizExceptionEnum.REQUEST_NULL);
         }
 

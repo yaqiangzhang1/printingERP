@@ -90,16 +90,14 @@ public class SysCodeController extends BaseController {
      */
     @Permission
     @RequestMapping("syscode_update")
-    public String syscodeUpdate(@RequestParam("syscodeId") Long syscodeId) {
-
-        if (ToolUtil.isEmpty(syscodeId)) {
+    public String syscodeUpdate(@RequestParam("codeId") Long codeId) {
+        if (ToolUtil.isEmpty(codeId)) {
             throw new RequestEmptyException();
         }
-
         //缓存系统编码修改前详细信息
-        SysCode syscode = syscodeService.getById(syscodeId);
+        SysCode syscode = syscodeService.getById(codeId);
         LogObjectHolder.me().set(syscode);
-
+        System.out.println(syscode.toString());
         return PREFIX + "syscode_edit.html";
     }
 
@@ -164,9 +162,11 @@ public class SysCodeController extends BaseController {
     @Permission
     @ResponseBody
     public Object list(@RequestParam(value = "condition", required = false) String condition,
-                       @RequestParam(value = "syscodeId", required = false) Long syscodeId) {
-        System.out.println("++++++++++++++++");
-        Page<Map<String, Object>> list = this.syscodeService.list(condition, syscodeId);
+                       @RequestParam(value = "codeId", required = false) Long codeId) {
+        if("null1".equals(codeId+"1")){
+            codeId = 0L;
+        }
+        Page<Map<String, Object>> list = this.syscodeService.list(condition, codeId);
         Page<Map<String, Object>> wrap = new SysCodeWrapper(list).wrap();
         return LayuiPageFactory.createPageInfo(wrap);
     }
@@ -181,7 +181,9 @@ public class SysCodeController extends BaseController {
     @Permission
     @ResponseBody
     public Object detail(@PathVariable("codeId") Long codeId) {
+        System.out.println(codeId+"---------------------------");
         SysCode syscode = syscodeService.getById(codeId);
+        System.out.println(syscode.toString()+"-----------------------------------------------------");
         SysCodeDto syscodeDto = new SysCodeDto();
         BeanUtil.copyProperties(syscode, syscodeDto);
         syscodeDto.setPName(ConstantFactory.me().getSimpleName(syscodeDto.getPid()));

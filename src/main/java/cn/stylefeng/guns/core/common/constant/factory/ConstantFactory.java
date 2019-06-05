@@ -22,6 +22,7 @@ import cn.stylefeng.guns.core.common.constant.cache.CacheKey;
 import cn.stylefeng.guns.core.common.constant.state.ManagerStatus;
 import cn.stylefeng.guns.core.common.constant.state.MenuStatus;
 import cn.stylefeng.guns.core.log.LogObjectHolder;
+import cn.stylefeng.guns.modular.archives.entity.SysCode;
 import cn.stylefeng.guns.modular.archives.mapper.SysCodeMapper;
 import cn.stylefeng.guns.modular.system.entity.*;
 import cn.stylefeng.guns.modular.system.mapper.*;
@@ -338,9 +339,9 @@ public class ConstantFactory implements IConstantFactory {
         } else if (codeId == 0L) {
             return "顶级";
         } else {
-            Dept dept = deptMapper.selectById(codeId);
-            if (ToolUtil.isNotEmpty(dept) && ToolUtil.isNotEmpty(dept.getFullName())) {
-                return dept.getFullName();
+            SysCode sysCode = syscodeMapper.selectById(codeId);
+            if (ToolUtil.isNotEmpty(sysCode) && ToolUtil.isNotEmpty(sysCode.getSimpleName())) {
+                return sysCode.getSimpleName();
             }
             return "";
         }

@@ -42,8 +42,12 @@ Feng.currentDate = function () {
     return date.getFullYear() + seperator + nowMonth + seperator + strDate;
 };
 Feng.getUrlParam = function (name) {
+    console.log(name);
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    console.log(reg);
+    console.log(window.location.search.substr(1));
     var r = window.location.search.substr(1).match(reg);
+    console.log(r);
     if (r != null) {
         return unescape(r[2]);
     } else {

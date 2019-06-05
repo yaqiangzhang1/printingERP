@@ -6,7 +6,7 @@ layui.use(['table', 'admin', 'ax', 'ztree'], function () {
     var $ZTree = layui.ztree;
 
     /**
-     * 系统管理--部门管理
+     * 系统管理--系统编码
      */
     var syscode = {
         tableId: "syscodeTable",
@@ -22,7 +22,8 @@ layui.use(['table', 'admin', 'ax', 'ztree'], function () {
         return [[
             {type: 'checkbox'},
             {field: 'codeId', hide: true, sort: true, title: 'id'},
-            {field: 'simpleName', sort: true, title: '名称'},
+            {field: 'pName',  sort: true, title: '编码种类'},
+            {field: 'simpleName', sort: true, title: '编码名称'},
             {align: 'center', toolbar: '#tableBar', title: '操作', minWidth: 200}
         ]];
     };
@@ -52,7 +53,7 @@ layui.use(['table', 'admin', 'ax', 'ztree'], function () {
         admin.putTempData('formOk', false);
         top.layui.admin.open({
             type: 2,
-            title: '添加部门',
+            title: '添加系统编码',
             content: Feng.ctxPath + '/syscode/syscode_add',
             end: function () {
                 admin.getTempData('formOk') && table.reload(syscode.tableId);
@@ -82,7 +83,7 @@ layui.use(['table', 'admin', 'ax', 'ztree'], function () {
         top.layui.admin.open({
             type: 2,
             title: '修改系统编码',
-            content: Feng.ctxPath + '/syscode/syscode_update?syscodeId=' + data.codeId,
+            content: Feng.ctxPath + '/syscode/syscode_update?codeId=' + data.codeId,
             end: function () {
                 admin.getTempData('formOk') && table.reload(syscode.tableId);
             }

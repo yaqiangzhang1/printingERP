@@ -34,12 +34,10 @@
         select
         <include refid="Base_Column_List"/>
         from sys_code where 1 = 1
-        <!--<if test="condition != null and condition != ''">-->
-            <!--and simple_name like CONCAT('%',#{condition},'%') or full_name like CONCAT('%',#{condition},'%')-->
-        <!--</if>-->
-        <!--<if test="codeId != null and codeId != ''">-->
-            <!--and (code_id = #{codeId} or code_id in ( select code_id from sys_code where pids like CONCAT('%$[', #{deptId}, '$]%') escape '$' ))-->
-        <!--</if>-->
+        <if test="condition != null and condition != ''">
+            and simple_name like CONCAT('%',#{condition},'%') or full_name like CONCAT('%',#{condition},'%')
+        </if>
+        and pid = #{codeId}
         order by  code_id ASC
     </select>
 
