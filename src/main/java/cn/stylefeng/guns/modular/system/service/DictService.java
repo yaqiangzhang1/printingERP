@@ -273,4 +273,8 @@ public class DictService extends ServiceImpl<DictMapper, Dict> {
             }
         }
     }
+
+    public List<Dict> getDictByTypeName(String code){
+        return baseMapper.getDictByTypeName(code);
+    }
 }

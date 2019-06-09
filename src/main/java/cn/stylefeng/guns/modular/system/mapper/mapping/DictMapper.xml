@@ -45,4 +45,10 @@
         </if>
     </select>
 
+
+    <select id="getDictByTypeName" resultType="cn.stylefeng.guns.modular.system.entity.Dict">
+      select
+        <include refid="Base_Column_List"></include>
+      from sys_dict where dict_type_id in (select dict_type_id from sys_dict_type where code=#{code})
+    </select>
 </mapper>
