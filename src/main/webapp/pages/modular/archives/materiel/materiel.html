@@ -1,0 +1,60 @@
+@layout("/common/_container.html",{plugins:["ztree"],js:["/assets/modular/archives/materiel/materiel.js"]}){
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">客户档案</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <!--<div class="layui-col-sm12 layui-col-md3 layui-col-lg2">-->
+            <!--<div class="layui-card">-->
+                <!--<div class="layui-card-body mini-bar">-->
+                    <!--<div class="ztree" id="deptTree"></div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <!--<div class="layui-form-item">-->
+                        <div class="layui-inline">
+                            <select id ="searchType" lay-verify="required" lay-search="">
+                                <option value="">全部</option>
+                                <option value="m_nubmer">物料编码</option>
+                                <option value="m_name">物料名称</option>
+                                <option value="m_brand">品牌</option>
+                                <option value="phone">物料种类</option>
+                                <option value="unit">单位</option>
+                                <option value="specifications">规格</option>
+                            </select>
+                        </div>
+                            <div class="layui-inline">
+                                <input id="search" class="layui-input" type="text" placeholder="搜索内容"/>
+                            </div>
+
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
+                                @if(shiro.hasPermission("/materiel/add")){
+                                <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>添加</button>
+                                @}
+                                <button id="btnExp" class="layui-btn icon-btn"><i class="layui-icon">&#xe67d;</i>导出</button>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="materielTable" lay-filter="materielTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tableBar">
+    @if(shiro.hasPermission("/materiel/edit")){
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit">修改</a>
+    @}
+    @if(shiro.hasPermission("/materiel/delete")){
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+    @}
+</script>
+@}

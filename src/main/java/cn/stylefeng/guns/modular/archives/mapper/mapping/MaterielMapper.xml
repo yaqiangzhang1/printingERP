@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.archives.mapper.MaterielMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.archives.entity.Materiel">
+        <id column="m_number" property="mNumber" />
+        <result column="m_name" property="mName" />
+        <result column="m_brand" property="mBrand" />
+        <result column="m_type" property="mType" />
+        <result column="unit" property="unit" />
+        <result column="specifications" property="specifications" />
+        <result column="amount" property="amount" />
+        <result column="maxstock" property="maxstock" />
+        <result column="minstock" property="minstock" />
+        <result column="remarks" property="remarks" />
+        <result column="create_time" property="createTime" />
+        <result column="create_user" property="createUser" />
+        <result column="update_time" property="updateTime" />
+        <result column="update_user" property="updateUser" />
+    </resultMap>
+
+    <!--&lt;!&ndash; 通用查询结果列 &ndash;&gt;-->
+    <sql id="Base_Column_List">
+        m_number AS "mNumber", m_name AS "mName", m_brand AS "mBrand", m_type AS "mType", unit AS "unit", specifications AS "specifications", amount AS "amount", maxstock AS "maxstock", minstock AS "minstock", remarks AS "remarks",create_time AS "createTime", create_user AS "createUser", update_time AS "updateTime", update_user AS "updateUser"
+    </sql>
+
+    <!--<sql id="Base_Column_List_With_Pwd">-->
+		 <!--user_id AS "userId", avatar AS "avatar", account AS "account", salt AS "salt", password AS "password", name AS "name", birthday AS "birthday", sex AS "sex", email AS "email", phone AS "phone", role_id AS "roleId", dept_id AS "deptId", status AS "status", create_time AS "createTime", create_user AS "createUser", update_time AS "updateTime", update_user AS "updateUser", version AS "version"-->
+	<!--</sql>-->
+
+    <select id="selectMateriel" resultType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from materiel
+        where status != 'DELETED'
+        <if test="searchType==''">
+            and (m_number like CONCAT('%',#{search},'%')
+            or m_name like CONCAT('%',#{search},'%')
+            or m_brand like CONCAT('%',#{search},'%')
+            or m_type like CONCAT('%',#{search},'%')
+            or unit like CONCAT('%',#{search},'%')
+            or specifications like CONCAT('%',#{search},'%')
+            or amount like CONCAT('%',#{search},'%')
+            or maxstock like CONCAT('%',#{search},'%')
+            or minstock like CONCAT('%',#{search},'%')
+            or remarks like CONCAT('%',#{search},'%'))
+        </if>
+        <if test="searchType != null and searchType != ''">
+            and (${searchType} like CONCAT('%',#{search},'%'))
+        </if>
+    </select>
+
+    <!--<update id="setStatus">-->
+		<!--update sys_user set status = #{status} where user_id = #{userId}-->
+	<!--</update>-->
+
+    <!--<update id="changePwd">-->
+		<!--update sys_user set password = #{pwd} where user_id = #{userId}-->
+	<!--</update>-->
+
+    <!--<update id="setRoles">-->
+		<!--update sys_user set role_id = #{roleIds} where user_id =-->
+		<!--#{userId}-->
+	<!--</update>-->
+
+    <select id="getBymNumber" resultType="cn.stylefeng.guns.modular.archives.entity.Materiel">
+        select
+        <include refid="Base_Column_List"/>
+        from materiel where m_number = #{mNumber}
+    </select>
+
+</mapper>

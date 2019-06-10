@@ -1,0 +1,76 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/archives/materiel/materiel_edit.js"]}){
+<form id="materielForm" lay-filter="materielForm" class="layui-form model-form">
+    <input name="mNumber" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">物料名称<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input id="mName" name="mName" placeholder="请输入物料名称" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">品牌</label>
+        <div class="layui-input-block">
+            <input name="mBrand" placeholder="请输入物料名称" type="text" class="layui-input" />
+        </div>
+    </div>
+    <div class="layui-inline">
+        <label class="layui-form-label">物料种类<span style="color: red;">*</span></label>
+        <div class="layui-input-inline">
+            <select name="mType" lay-verify="required" lay-search="">
+                <option value="">直接选择或搜索选择</option>
+                @for(it in M_Type){
+                <option value="${it.name}">${it.name}</option>
+                @}
+            </select>
+        </div>
+    </div>
+    <div class="layui-inline">
+        <label class="layui-form-label">单位<span style="color: red;">*</span></label>
+        <div class="layui-input-inline">
+            <select name="unit" lay-verify="required" lay-search="">
+                @for(it in Unit){
+                <option value="${it.name}">${it.name}</option>
+                @}
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">规格</label>
+        <div class="layui-input-block">
+            <input name="specifications" placeholder="请输入物料规格" type="text" class="layui-input" />
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">报价金额</label>
+        <div class="layui-input-block">
+            <input name="amount" placeholder="请输入物料报价金额" type="text" class="layui-input"  oninput="value=value.replace(/[^\d]/g,'')"/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">最高库存</label>
+        <div class="layui-input-block">
+            <input name="maxstock" placeholder="请输入物料最高库存" type="text" class="layui-input" oninput="value=value.replace(/[^\d]/g,'')"/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">最低库存</label>
+        <div class="layui-input-block">
+            <input name="minstock" placeholder="请输入物料最低库存" type="text" class="layui-input" oninput="value=value.replace(/[^\d]/g,'')"/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">备注</label>
+        <div class="layui-input-block">
+            <input name="remarks" placeholder="备注" type="text" class="layui-input" />
+        </div>
+    </div>
+
+
+
+    <div class="layui-form-item text-right">
+        <!--<button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>-->
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog" id="backupPage">返回</button>
+    </div>
+</form>
+@}

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.archives.mapper.MachineMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.archives.entity.Machine">
+        <id column="mc_number" property="mcNumber" />
+        <result column="mc_name" property="mcName" />
+        <result column="mc_model" property="mcModel" />
+        <result column="mc_address" property="mcAddress" />
+        <result column="factorydate" property="factorydate" />
+        <result column="factorynumber" property="factorynumber" />
+        <result column="useyear" property="useyear" />
+        <result column="cycle" property="cycle" />
+        <result column="telephone" property="telephone" />
+        <result column="remarks" property="remarks" />
+        <result column="create_time" property="createTime" />
+        <result column="create_user" property="createUser" />
+        <result column="update_time" property="updateTime" />
+        <result column="update_user" property="updateUser" />
+    </resultMap>
+
+    <!--&lt;!&ndash; 通用查询结果列 &ndash;&gt;-->
+    <sql id="Base_Column_List">
+        mc_number AS "mcNumber", mc_name AS "mcName", mc_model AS "mcModel", mc_address AS "mcAddress", factorydate AS "factorydate", factorynumber AS "factorynumber", useyear AS "useyear", cycle AS "cycle", telephone AS "telephone", remarks AS "remarks",create_time AS "createTime", create_user AS "createUser", update_time AS "updateTime", update_user AS "updateUser"
+    </sql>
+
+    <!--<sql id="Base_Column_List_With_Pwd">-->
+		 <!--user_id AS "userId", avatar AS "avatar", account AS "account", salt AS "salt", password AS "password", name AS "name", birthday AS "birthday", sex AS "sex", email AS "email", phone AS "phone", role_id AS "roleId", dept_id AS "deptId", status AS "status", create_time AS "createTime", create_user AS "createUser", update_time AS "updateTime", update_user AS "updateUser", version AS "version"-->
+	<!--</sql>-->
+
+    <select id="selectMachine" resultType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from machine
+        where status != 'DELETED'
+        <if test="searchType==''">
+            and (mc_number like CONCAT('%',#{search},'%')
+            or mc_name like CONCAT('%',#{search},'%')
+            or mc_model like CONCAT('%',#{search},'%')
+            or remarks like CONCAT('%',#{search},'%'))
+        </if>
+        <if test="searchType != null and searchType != ''">
+            and (${searchType} like CONCAT('%',#{search},'%'))
+        </if>
+    </select>
+
+    <!--<update id="setStatus">-->
+		<!--update sys_user set status = #{status} where user_id = #{userId}-->
+	<!--</update>-->
+
+    <!--<update id="changePwd">-->
+		<!--update sys_user set password = #{pwd} where user_id = #{userId}-->
+	<!--</update>-->
+
+    <!--<update id="setRoles">-->
+		<!--update sys_user set role_id = #{roleIds} where user_id =-->
+		<!--#{userId}-->
+	<!--</update>-->
+
+    <select id="getBymcNumber" resultType="cn.stylefeng.guns.modular.archives.entity.Machine">
+        select
+        <include refid="Base_Column_List"/>
+        from machine where mc_number = #{mcNumber}
+    </select>
+
+</mapper>

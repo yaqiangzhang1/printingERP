@@ -55,9 +55,9 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
 
     // 表单提交事件
     form.on('submit(btnSubmit)', function (data) {
-        var ajax = new $ax(Feng.ctxPath + "/customer/add", function (data) {
+        var ajax = new $ax(Feng.ctxPath + "/materiel/add", function (data) {
             Feng.success("添加成功！");
-            window.location.href = Feng.ctxPath + "/customer";
+            window.location.href = Feng.ctxPath + "/materiel";
         }, function (data) {
             Feng.error("添加失败！" + data.responseJSON.message)
         });
@@ -70,6 +70,6 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
 
     //返回按钮
     $("#backupPage").click(function () {
-        window.location.href = Feng.ctxPath + "/customer";
+        window.location.href = Feng.ctxPath + "/materiel";
     });
 });

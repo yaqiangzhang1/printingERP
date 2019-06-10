@@ -1,12 +1,4 @@
-/**
- * 用户详情对话框
- */
-var UserInfoDlg = {
-    data: {
-        deptId: "",
-        deptName: ""
-    }
-};
+
 
 layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
     var $ = layui.jquery;
@@ -16,6 +8,11 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
     var laydate = layui.laydate;
     var layer = layui.layer;
 
+
+    // 渲染时间选择框
+    laydate.render({
+        elem: '#factorydate'
+    });
     // 让当前iframe弹层高度适应
     admin.iframeAuto();
 
@@ -55,9 +52,9 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
 
     // 表单提交事件
     form.on('submit(btnSubmit)', function (data) {
-        var ajax = new $ax(Feng.ctxPath + "/customer/add", function (data) {
+        var ajax = new $ax(Feng.ctxPath + "/machine/add", function (data) {
             Feng.success("添加成功！");
-            window.location.href = Feng.ctxPath + "/customer";
+            window.location.href = Feng.ctxPath + "/machine";
         }, function (data) {
             Feng.error("添加失败！" + data.responseJSON.message)
         });
@@ -70,6 +67,6 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
 
     //返回按钮
     $("#backupPage").click(function () {
-        window.location.href = Feng.ctxPath + "/customer";
+        window.location.href = Feng.ctxPath + "/materiel";
     });
 });
