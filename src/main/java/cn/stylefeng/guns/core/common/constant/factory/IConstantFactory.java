@@ -139,10 +139,6 @@ public interface IConstantFactory {
      */
     List<Long> getParentDeptIds(Long deptId);
 
-    /**
-     * 获取系统编码名称
-     *
-     * */
-    String getSimpleName(Long codeId);
+
 
 }

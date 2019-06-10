@@ -78,6 +78,47 @@ public class Customer implements Serializable {
     @TableField("discount")
     private String discount;
 
+
+    /**
+     *
+     * 状态
+     *
+     * */
+    @TableField("status")
+    private String status;
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "cNumber='" + cNumber + '\'' +
+                ", cName='" + cName + '\'' +
+                ", cTrade='" + cTrade + '\'' +
+                ", cNature='" + cNature + '\'' +
+                ", cSource='" + cSource + '\'' +
+                ", cType='" + cType + '\'' +
+                ", cRegion='" + cRegion + '\'' +
+                ", salesman='" + salesman + '\'' +
+                ", address='" + address + '\'' +
+                ", discount='" + discount + '\'' +
+                ", status='" + status + '\'' +
+                ", remarks='" + remarks + '\'' +
+                ", contacts='" + contacts + '\'' +
+                ", phone='" + phone + '\'' +
+                ", createTime=" + createTime +
+                ", createUser=" + createUser +
+                ", updateTime=" + updateTime +
+                ", updateUser=" + updateUser +
+                '}';
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     /**
      * 备注
      */
@@ -119,29 +160,6 @@ public class Customer implements Serializable {
      */
     @TableField(value = "update_user", fill = FieldFill.UPDATE)
     private Long updateUser;
-
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "cNumber=" + cNumber +
-                ", cName='" + cName + '\'' +
-                ", cTrade='" + cTrade + '\'' +
-                ", cNature='" + cNature + '\'' +
-                ", cSource='" + cSource + '\'' +
-                ", cType='" + cType + '\'' +
-                ", cRegion=" + cRegion +
-                ", salesman='" + salesman + '\'' +
-                ", address='" + address + '\'' +
-                ", discount='" + discount + '\'' +
-                ", remarks='" + remarks + '\'' +
-                ", contacts=" + contacts +
-                ", phone='" + phone + '\'' +
-                ", createTime=" + createTime +
-                ", createUser=" + createUser +
-                ", updateTime=" + updateTime +
-                ", updateUser=" + updateUser +
-                '}';
-    }
 
     public static long getSerialVersionUID() {
         return serialVersionUID;

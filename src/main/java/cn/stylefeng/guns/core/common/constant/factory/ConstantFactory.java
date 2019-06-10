@@ -22,8 +22,6 @@ import cn.stylefeng.guns.core.common.constant.cache.CacheKey;
 import cn.stylefeng.guns.core.common.constant.state.ManagerStatus;
 import cn.stylefeng.guns.core.common.constant.state.MenuStatus;
 import cn.stylefeng.guns.core.log.LogObjectHolder;
-import cn.stylefeng.guns.modular.archives.entity.SysCode;
-import cn.stylefeng.guns.modular.archives.mapper.SysCodeMapper;
 import cn.stylefeng.guns.modular.system.entity.*;
 import cn.stylefeng.guns.modular.system.mapper.*;
 import cn.stylefeng.roses.core.util.SpringContextHolder;
@@ -53,7 +51,7 @@ public class ConstantFactory implements IConstantFactory {
     private UserMapper userMapper = SpringContextHolder.getBean(UserMapper.class);
     private MenuMapper menuMapper = SpringContextHolder.getBean(MenuMapper.class);
     private NoticeMapper noticeMapper = SpringContextHolder.getBean(NoticeMapper.class);
-    private SysCodeMapper syscodeMapper = SpringContextHolder.getBean(SysCodeMapper.class);
+
 
     public static IConstantFactory me() {
         return SpringContextHolder.getBean("constantFactory");
@@ -331,20 +329,6 @@ public class ConstantFactory implements IConstantFactory {
         }
         return parentDeptIds;
     }
-    @Override
-    @Cacheable(value = Cache.CONSTANT, key = "'" + CacheKey.DEPT_NAME + "'+#codeId")
-    public String getSimpleName(Long codeId) {
-        if (codeId == null) {
-            return "";
-        } else if (codeId == 0L) {
-            return "顶级";
-        } else {
-            SysCode sysCode = syscodeMapper.selectById(codeId);
-            if (ToolUtil.isNotEmpty(sysCode) && ToolUtil.isNotEmpty(sysCode.getSimpleName())) {
-                return sysCode.getSimpleName();
-            }
-            return "";
-        }
-    }
+
 
 }

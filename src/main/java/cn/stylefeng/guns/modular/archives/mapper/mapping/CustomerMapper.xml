@@ -26,18 +26,15 @@
 
     <!--&lt;!&ndash; 通用查询结果列 &ndash;&gt;-->
     <sql id="Base_Column_List">
-        c_number AS "cNumber", c_name AS "cName", c_trade AS "cTrade", c_nature AS "cNature", c_source AS "cSource", c_type AS "cType", c_region AS "cRegion", salesman AS "salesman", address AS "address", discount AS "discount", remarks AS "remarks", contacts AS "contacts", phone AS "phone",create_time AS "createTime", create_user AS "createUser", update_time AS "updateTime", update_user AS "updateUser"
+        c_number AS "cNumber", c_name AS "cName", c_trade AS "cTrade", c_nature AS "cNature", c_source AS "cSource", c_type AS "cType", c_region AS "cRegion", salesman AS "salesman", address AS "address", discount AS "discount", remarks AS "remarks", contacts AS "contacts", phone AS "phone",create_time AS "createTime", create_user AS "createUser", update_time AS "updateTime", update_user AS "updateUser",status AS "status"
     </sql>
 
-    <!--<sql id="Base_Column_List_With_Pwd">-->
-		 <!--user_id AS "userId", avatar AS "avatar", account AS "account", salt AS "salt", password AS "password", name AS "name", birthday AS "birthday", sex AS "sex", email AS "email", phone AS "phone", role_id AS "roleId", dept_id AS "deptId", status AS "status", create_time AS "createTime", create_user AS "createUser", update_time AS "updateTime", update_user AS "updateUser", version AS "version"-->
-	<!--</sql>-->
 
     <select id="selectCustomer" resultType="map">
         select
         <include refid="Base_Column_List"/>
         from customer
-        where 1=1
+        where status != 'DELETED'
         <if test="searchType==''">
             and (c_number like CONCAT('%',#{search},'%')
             or c_name like CONCAT('%',#{search},'%')
@@ -58,18 +55,6 @@
         </if>
     </select>
 
-    <!--<update id="setStatus">-->
-		<!--update sys_user set status = #{status} where user_id = #{userId}-->
-	<!--</update>-->
-
-    <!--<update id="changePwd">-->
-		<!--update sys_user set password = #{pwd} where user_id = #{userId}-->
-	<!--</update>-->
-
-    <!--<update id="setRoles">-->
-		<!--update sys_user set role_id = #{roleIds} where user_id =-->
-		<!--#{userId}-->
-	<!--</update>-->
 
     <select id="getBycName" resultType="cn.stylefeng.guns.modular.archives.entity.Customer">
         select
