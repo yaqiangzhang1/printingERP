@@ -32,8 +32,8 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax'], functio
             {field: 'salesman', sort: true, title: '业务员'},
             {field: 'address', sort: true, title: '地址'},
             {field: 'discount', sort: true, title: '报价折扣'},
-            {field: 'remarks', sort: true, title: '备注'},
-            {fixed: 'right', title:'操作', toolbar: '#tableBar', width:150}
+            {field: 'remarks', sort: true, title: '备注'}
+            // {fixed: 'right', title:'操作', toolbar: '#tableBar', width:150}
         ]];
     };
 
@@ -55,6 +55,13 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax'], functio
     };
 
     /**
+     * 弹出客户详情对话框
+     */
+    customer.openInfocustomer = function (data) {
+        window.location.href = Feng.ctxPath + '/customer/customer_info?cNumber=' + data.cNumber;
+    };
+
+    /**
      * 点击编辑
      *
      * @param data 点击按钮时候的行数据
@@ -72,25 +79,6 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax'], functio
         } else {
             table.exportFile(tableResult.config.id, checkRows.data, 'xls');
         }
-    };
-
-    /**
-     * 点击删除用户按钮
-     *
-     * @param data 点击按钮时候的行数据
-     */
-    customer.onDeleteCustomer = function (data) {
-        var operation = function () {
-            var ajax = new $ax(Feng.ctxPath + "/customer/customer_delete", function () {
-                table.reload(customer.tableId);
-                Feng.success("删除成功!");
-            }, function (data) {
-                Feng.error("删除失败!" + data.responseJSON.message + "!");
-            });
-            ajax.set("cNumber", data.cNumber);
-            ajax.start();
-        };
-        Feng.confirm("是否删除用户" + data.cName + "?", operation);
     };
 
     // 渲染表格
@@ -116,20 +104,13 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax'], functio
 
     // 导出excel
     $('#btnExp').click(function () {
-        btnSearch.exportExcel();
+        customer.exportExcel();
     });
 
-    // 工具条点击事件
-    table.on('tool(' + customer.tableId + ')', function (obj) {
+    //监听行单击事件（单击事件为：rowDouble）
+    table.on('rowDouble('+customer.tableId+')', function(obj){
         var data = obj.data;
-        var layEvent = obj.event;
-
-        if (layEvent === 'edit') {
-            customer.onEditCustomer(data);
-        } else if (layEvent === 'delete') {
-            customer.onDeleteCustomer(data);
-        }
+        customer.openInfocustomer(data);
     });
-
 
 });

@@ -33,7 +33,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax'], functio
             {field: 'cycle', sort: true, title: '保养周期'},
             {field: 'telephone', sort: true, title: '售后电话'},
             {field: 'remarks', sort: true, title: '备注'},
-            {fixed: 'right', title:'操作', toolbar: '#tableBar', width:150}
+            // {fixed: 'right', title:'操作', toolbar: '#tableBar', width:150}
         ]];
     };
 
@@ -53,6 +53,14 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax'], functio
     machine.openAddmachine = function () {
         window.location.href = Feng.ctxPath + '/machine/machine_add';
     };
+
+    /**
+     * 弹出详情对话框
+     */
+    machine.openInfomachine = function (data) {
+        window.location.href = Feng.ctxPath + '/machine/to_machine_info?mcNumber=' + data.mcNumber
+    };
+
     /**
      * 导出excel按钮
      */
@@ -71,28 +79,8 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax'], functio
      * @param data 点击按钮时候的行数据
      */
     machine.onEditmachine = function (data) {
-        window.location.href = Feng.ctxPath + '/machine/to_machine_edit?mcNumber=' + data.mcNumber
+        window.location.href = Feng.ctxPath + '/machine/to_machine_edit?mcNumber=' + data.mcNumber;
     };
-
-    /**
-     * 点击删除用户按钮
-     *
-     * @param data 点击按钮时候的行数据
-     */
-    machine.onDeletemachine = function (data) {
-        var operation = function () {
-            var ajax = new $ax(Feng.ctxPath + "/machine/machine_delete", function () {
-                table.reload(machine.tableId);
-                Feng.success("删除成功!");
-            }, function (data) {
-                Feng.error("删除失败!" + data.responseJSON.message + "!");
-            });
-            ajax.set("mcNumber", data.mcNumber);
-            ajax.start();
-        };
-        Feng.confirm("是否删除设备" + data.mcName + "?", operation);
-    };
-
 
     // 渲染表格
     var tableResult = table.render({
@@ -127,16 +115,9 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax'], functio
         btnSearch.exportExcel();
     });
 
-    // 工具条点击事件
-    table.on('tool(' + machine.tableId + ')', function (obj) {
+    //监听行单击事件（单击事件为：rowDouble）
+    table.on('rowDouble('+machine.tableId+')', function(obj){
         var data = obj.data;
-        var layEvent = obj.event;
-        if (layEvent === 'edit') {
-            machine.onEditmachine(data);
-        } else if (layEvent === 'delete') {
-            machine.onDeletemachine(data);
-        }
+        machine.openInfomachine(data);
     });
-
-
 });

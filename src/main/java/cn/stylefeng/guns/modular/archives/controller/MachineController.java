@@ -129,6 +129,17 @@ public class MachineController extends BaseController {
     }
 
     /**
+     * 跳转到设备详情页面
+     *
+     * @author zls
+     * @Date
+     */
+    @RequestMapping("/to_machine_info")
+    public String materielInfo() {
+        return PREFIX + "machine_info.html";
+    }
+
+    /**
      * 获取设备详情
      *
      * @author fengshuonan

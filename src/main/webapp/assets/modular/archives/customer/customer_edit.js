@@ -20,7 +20,7 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
     form.on('submit(btnSubmit)', function (data) {
         var ajax = new $ax(Feng.ctxPath + "/customer/customer_edit", function (data) {
             Feng.success("修改成功！");
-            window.location.href = Feng.ctxPath + "/customer";
+            window.location.href = Feng.ctxPath + '/customer/customer_info?cNumber=' + result.data.cNumber;
         }, function (data) {
             Feng.error("修改成功！" + data.responseJSON.message)
         });
@@ -29,8 +29,8 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
         return false;
     });
 
-    //返回按钮
-    $("#backupPage").click(function () {
-        window.location.href = Feng.ctxPath + "/customer";
+    $("#backPage").click(function () {
+        window.location.href = Feng.ctxPath + '/customer/customer_info?cNumber=' + result.data.cNumber;
     });
+
 });

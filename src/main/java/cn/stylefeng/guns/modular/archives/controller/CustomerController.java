@@ -91,6 +91,22 @@ public class CustomerController extends BaseController {
         return PREFIX + "customer_add.html";
     }
 
+    /**
+     * 跳转到客户详情的页面
+     *
+     * @author zls
+     * @Date
+     */
+    @RequestMapping("/customer_info")
+    public String infoView(Model model) {
+        model.addAttribute("Nature",dictService.getDictByTypeName("C_Nature"));
+        model.addAttribute("Trade",dictService.getDictByTypeName("C_Trade"));
+        model.addAttribute("Source",dictService.getDictByTypeName("C_Source"));
+        model.addAttribute("Type",dictService.getDictByTypeName("C_Type"));
+        model.addAttribute("Region",dictService.getDictByTypeName("C_Region"));
+        return PREFIX + "customer_info.html";
+    }
+
 
     /**
      * 添加客户档案
@@ -140,7 +156,6 @@ public class CustomerController extends BaseController {
     public ResponseData getcustomer(@RequestParam String cNumber) {
         return ResponseData.success(customerService.getById(cNumber));
     }
-
 
     /**
      * 修改客户档案

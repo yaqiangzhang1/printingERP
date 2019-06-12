@@ -134,6 +134,19 @@ public class MaterielController extends BaseController {
     }
 
     /**
+     * 跳转到物料详情页面
+     *
+     * @author zls
+     * @Date
+     */
+    @RequestMapping("/to_materiel_info")
+    public String materielInfo(Model model) {
+        model.addAttribute("Unit",dictService.getDictByTypeName("Unit"));
+        model.addAttribute("M_Type",dictService.getDictByTypeName("M_Type"));
+        return PREFIX + "materiel_info.html";
+    }
+
+    /**
      * 获取物料详情
      *
      * @author fengshuonan

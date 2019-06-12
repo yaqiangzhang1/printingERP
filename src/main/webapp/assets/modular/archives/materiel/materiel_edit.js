@@ -14,14 +14,11 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
     console.log(result.data)
     form.val('materielForm', result.data);
 
-
-
-
     // 表单提交事件
     form.on('submit(btnSubmit)', function (data) {
         var ajax = new $ax(Feng.ctxPath + "/materiel/materiel_edit", function (data) {
             Feng.success("修改成功！");
-            window.location.href = Feng.ctxPath + "/materiel";
+            window.location.href = Feng.ctxPath + '/materiel/to_materiel_info?mNumber=' + result.data.mNumber;
         }, function (data) {
             Feng.error("修改成功！" + data.responseJSON.message)
         });
@@ -32,6 +29,6 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
 
     //返回按钮
     $("#backupPage").click(function () {
-        window.location.href = Feng.ctxPath + "/materiel";
+        window.location.href = Feng.ctxPath + '/materiel/to_materiel_info?mNumber=' + result.data.mNumber;
     });
 });

@@ -29,8 +29,8 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax'], functio
             {field: 'mType', sort: true, title: '物料种类'},
             {field: 'unit', sort: true, title: '单位'},
             {field: 'specifications', sort: true, title: '规格'},
-            {field: 'remarks', sort: true, title: '备注'},
-            {fixed: 'right', title:'操作', toolbar: '#tableBar', width:150}
+            {field: 'remarks', sort: true, title: '备注'}
+            // {fixed: 'right', title:'操作', toolbar: '#tableBar', width:150}
         ]];
     };
 
@@ -69,9 +69,16 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax'], functio
      * @param data 点击按钮时候的行数据
      */
     materiel.onEditmateriel = function (data) {
-        console.log(data)
-        console.log(data.mNumber)
-        window.location.href = Feng.ctxPath + '/materiel/to_materiel_edit?mNumber=' + data.mNumber
+        window.location.href = Feng.ctxPath + '/materiel/to_materiel_edit?mNumber=' + data.mNumber;
+    };
+
+    /**
+     * 双击行进入详情页面
+     *
+     * @param data 点击按钮时候的行数据
+     */
+    materiel.openInfomateriel = function (data) {
+        window.location.href = Feng.ctxPath + '/materiel/to_materiel_info?mNumber=' + data.mNumber;
     };
 
     /**
@@ -132,5 +139,10 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax'], functio
         }
     });
 
+    //监听行单击事件（单击事件为：rowDouble）
+    table.on('rowDouble('+materiel.tableId+')', function(obj){
+        var data = obj.data;
+        materiel.openInfomateriel(data);
+    });
 
 });
