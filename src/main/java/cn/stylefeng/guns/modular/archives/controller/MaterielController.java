@@ -14,17 +14,11 @@
  * limitations under the License.
  */
 package cn.stylefeng.guns.modular.archives.controller;
-
 import cn.stylefeng.guns.config.properties.GunsProperties;
-import cn.stylefeng.guns.core.common.annotion.BussinessLog;
 import cn.stylefeng.guns.core.common.annotion.Permission;
-import cn.stylefeng.guns.core.common.constant.dictmap.CustomerDict;
 import cn.stylefeng.guns.core.common.page.LayuiPageFactory;
-import cn.stylefeng.guns.modular.archives.entity.Customer;
 import cn.stylefeng.guns.modular.archives.entity.Materiel;
-import cn.stylefeng.guns.modular.archives.service.CustomerService;
 import cn.stylefeng.guns.modular.archives.service.MaterielService;
-import cn.stylefeng.guns.modular.archives.warpper.CustomerWrapper;
 import cn.stylefeng.guns.modular.archives.warpper.MaterielWrapper;
 import cn.stylefeng.guns.modular.system.service.DictService;
 import cn.stylefeng.roses.core.base.controller.BaseController;

@@ -1,17 +1,10 @@
 package cn.stylefeng.guns.modular.archives.service;
 
-import cn.stylefeng.guns.core.common.exception.BizExceptionEnum;
 import cn.stylefeng.guns.core.common.page.LayuiPageFactory;
-import cn.stylefeng.guns.core.shiro.service.UserAuthService;
-import cn.stylefeng.guns.modular.archives.entity.Customer;
 import cn.stylefeng.guns.modular.archives.entity.Materiel;
-import cn.stylefeng.guns.modular.archives.mapper.CustomerMapper;
 import cn.stylefeng.guns.modular.archives.mapper.MaterielMapper;
-import cn.stylefeng.guns.modular.system.service.MenuService;
-import cn.stylefeng.roses.kernel.model.exception.ServiceException;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
