@@ -2,12 +2,15 @@ package cn.stylefeng.guns.modular.business.service;
 
 
 import cn.stylefeng.guns.core.common.page.LayuiPageFactory;
+import cn.stylefeng.guns.modular.business.entity.Cost;
 import cn.stylefeng.guns.modular.business.entity.MOrder;
 import cn.stylefeng.guns.modular.business.mapper.MOrderMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -46,6 +49,25 @@ public class MOrderService extends ServiceImpl<MOrderMapper, MOrder> {
         return this.baseMapper.selectMOrder(page,searchType,search);
     }
 
+
+    /**
+     * 根据订单编码查询订单
+     *
+     * */
+
+    public MOrder selectMOrderByoNumber( String oNumber){
+        return this.baseMapper.selectMOrderByoNumber(oNumber);
+    }
+
+
+    /**
+     *
+     * 根据订单编号获取费用信息
+     * */
+
+    public List<Cost> getCostByoNumber(String oNumber){
+        return this.baseMapper.getCostByoNumber(oNumber);
+    }
 //    /**
 //     * 通过客户名称获取客户
 //     *

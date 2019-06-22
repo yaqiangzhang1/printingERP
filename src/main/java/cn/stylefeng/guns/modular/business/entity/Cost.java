@@ -28,6 +28,15 @@ public class Cost implements Serializable {
     private Long id;
 
     /**
+     *
+     *
+     * */
+    private Long dictId;
+
+
+    private String name;
+
+    /**
      * 订单编号
      */
     @TableField("o_number")
@@ -45,6 +54,18 @@ public class Cost implements Serializable {
     @TableField("cost")
     private Double cost;
 
+    @Override
+    public String toString() {
+        return "Cost{" +
+                "id=" + id +
+                ", dictId=" + dictId +
+                ", name='" + name + '\'' +
+                ", o_number='" + o_number + '\'' +
+                ", costnumber=" + costnumber +
+                ", cost=" + cost +
+                '}';
+    }
+
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
@@ -55,6 +76,22 @@ public class Cost implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getDictId() {
+        return dictId;
+    }
+
+    public void setDictId(Long dictId) {
+        this.dictId = dictId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getO_number() {
@@ -79,15 +116,5 @@ public class Cost implements Serializable {
 
     public void setCost(Double cost) {
         this.cost = cost;
-    }
-
-    @Override
-    public String toString() {
-        return "Cost{" +
-                "id=" + id +
-                ", o_number='" + o_number + '\'' +
-                ", costnumber=" + costnumber +
-                ", cost=" + cost +
-                '}';
     }
 }

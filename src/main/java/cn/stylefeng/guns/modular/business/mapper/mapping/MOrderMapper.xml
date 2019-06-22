@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.stylefeng.guns.modular.archives.business.MOrderMapper">
+<mapper namespace="cn.stylefeng.guns.modular.business.mapper.MOrderMapper">
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.business.entity.MOrder">
@@ -44,20 +44,20 @@
 
     <!--&lt;!&ndash; 通用查询结果列 &ndash;&gt;-->
     <sql id="Base_Column_List">
-        o_number AS "o_number",
-        o_type AS "o_type",
-        o_ststus AS "o_ststus",
-        salesman AS "salesman",
-        c_name AS "c_name",
-        p_name AS "p_name",
-        p_number AS "p_number",
-        p_size AS "p_size",
-        o_quantity AS "o_quantity",
+         m.o_number AS "oNumber",
+        m.o_type AS "oType",
+        m.o_ststus AS "oStstus",
+        c.salesman AS "salesman",
+        c.c_name AS "cName",
+        p_name AS "pName",
+        p_number AS "pNumber",
+        p_size AS "pSize",
+        o_quantity AS "oQuantity",
         unit AS "unit",
-        c_o_number AS "c_o_number",
+        c_o_number AS "cONumber",
         ordertime AS "ordertime",
-        contacts AS "contacts",
-        phone AS "phone",
+        c.contacts AS "contacts",
+        c.phone AS "phone",
         deliverydate AS "deliverydate",
         settlementdate AS "settlementdate",
         printtype AS "printtype",
@@ -65,29 +65,28 @@
         onlineamount AS "onlineamount",
         orderamount AS "orderamount",
         upload AS "upload",
-        p_description AS "p_description",
-        c_provide AS "c_provide",
+        p_description AS "pDescription",
+        c_provide AS "cProvide",
         printask AS "printask",
         printafterask AS "printafterask",
         pinshaiask AS "pinshaiask",
         waifaask AS "waifaask",
         deliveryask AS "deliveryask",
         description AS "description",
-        status AS "status"
-        remarks AS "remarks",
-        create_time AS "createTime",
-        create_user AS "createUser",
-        update_time AS "updateTime",
-        update_user AS "updateUser",
+        m.status  AS "status",
+        m.remarks AS "remarks",
+        m.create_time AS "createTime",
+        m.create_user AS "createUser",
+        m.update_time AS "updateTime",
+        m.update_user AS "updateUser"
 
     </sql>
 
 
-    <select id="selectrMOrder" resultType="map">
+    <select id="selectMOrder" resultType="map">
         select
         <include refid="Base_Column_List"/>
-        from m_order m left JOIN  customer c ON m.c_name = c.c_number and
-        status != 'DELETED'
+        from (select * from m_order WHERE status != 'DELETED') m left JOIN  customer c ON m.c_name = c.c_number
         <!--<if test="searchType==''">-->
             <!--and (c_number like CONCAT('%',#{search},'%')-->
             <!--or c_name like CONCAT('%',#{search},'%')-->
@@ -108,6 +107,34 @@
         <!--</if>-->
     </select>
 
+    <select id="selectMOrderByoNumber" resultType="cn.stylefeng.guns.modular.business.entity.MOrder">
+        select
+        <include refid="Base_Column_List"/>
+        from (select * from m_order WHERE status != 'DELETED' and o_number = #{oNumber}) m left JOIN  customer c ON m.c_name = c.c_number
+        <!--<if test="searchType==''">-->
+        <!--and (c_number like CONCAT('%',#{search},'%')-->
+        <!--or c_name like CONCAT('%',#{search},'%')-->
+        <!--or c_trade like CONCAT('%',#{search},'%')-->
+        <!--or c_nature like CONCAT('%',#{search},'%')-->
+        <!--or c_source like CONCAT('%',#{search},'%')-->
+        <!--or c_type like CONCAT('%',#{search},'%')-->
+        <!--or c_region like CONCAT('%',#{search},'%')-->
+        <!--or salesman like CONCAT('%',#{search},'%')-->
+        <!--or address like CONCAT('%',#{search},'%')-->
+        <!--or discount like CONCAT('%',#{search},'%')-->
+        <!--or contacts like CONCAT('%',#{search},'%')-->
+        <!--or remarks like CONCAT('%',#{search},'%')-->
+        <!--or phone like CONCAT('%',#{search},'%'))-->
+        <!--</if>-->
+        <!--<if test="searchType != null and searchType != ''">-->
+        <!--and (${searchType} like CONCAT('%',#{search},'%'))-->
+        <!--</if>-->
+    </select>
 
+    <select id="getCostByoNumber" resultType="cn.stylefeng.guns.modular.business.entity.Cost">
+         select dictId,name,o_number,costnumber,IFNULL(cost,0) as cost from (
+ select dict_id AS "dictId", name AS "name" from sys_dict where dict_type_id in (select dict_type_id from sys_dict_type where code="Cost")
+ ) a LEFT JOIN cost c ON a.dictId = c.costnumber AND c.o_number = #{oNumber}
+    </select>
 
 </mapper>

@@ -1,0 +1,50 @@
+@layout("/common/_container.html",{plugins:["ztree"],js:["/assets/modular/business/MOrder/MOrder.js"]}){
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">订单管理</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <!--<div class="layui-form-item">-->
+                        <div class="layui-inline">
+                            <select id ="searchType" lay-verify="required" lay-search="">
+                                <option value="">全部</option>
+                                <option value="c_number">客户编码</option>
+                                <option value="c_name">客户名称</option>
+                                <option value="contacts">联系人</option>
+                                <option value="phone">联系电话</option>
+                                <option value="salesman">业务员</option>
+                                <option value="c_trade">客户行业</option>
+                                <option value="c_nature">客户性质</option>
+                                <option value="c_source">客户来源</option>
+                                <option value="c_type">客户类型</option>
+                                <option value="c_region">客户地区</option>
+                            </select>
+                        </div>
+                            <div class="layui-inline">
+                                <input id="search" class="layui-input" type="text" placeholder="搜索内容"/>
+                            </div>
+
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
+                                @if(shiro.hasPermission("/MOrder/add")){
+                                <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>添加</button>
+                                @}
+                                <button id="btnExp" class="layui-btn icon-btn"><i class="layui-icon">&#xe67d;</i>导出</button>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="MOrderTable" lay-filter="MOrderTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@}

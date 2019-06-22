@@ -16,17 +16,24 @@
 package cn.stylefeng.guns.modular.business.controller;
 
 import cn.stylefeng.guns.core.common.annotion.Permission;
+import cn.stylefeng.guns.modular.business.entity.Cost;
 import cn.stylefeng.guns.modular.business.service.MOrderService;
 import cn.stylefeng.guns.modular.business.warpper.MOrderWrapper;
 import cn.stylefeng.guns.core.common.page.LayuiPageFactory;
+import cn.stylefeng.guns.modular.system.entity.Dict;
+import cn.stylefeng.guns.modular.system.service.DictService;
 import cn.stylefeng.roses.core.base.controller.BaseController;
+import cn.stylefeng.roses.core.reqres.response.ResponseData;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 
@@ -43,6 +50,8 @@ public class MOrderController extends BaseController {
     private static String PREFIX = "/modular/business/MOrder/";
     @Autowired
     private MOrderService mOrderService;
+    @Autowired
+    private DictService dictService;
 
 
     /**
@@ -73,6 +82,63 @@ public class MOrderController extends BaseController {
         return LayuiPageFactory.createPageInfo(wrapped);
     }
 
+
+    /**
+     * 跳转到增加订单的页面
+     *
+     * @author fengshuonan
+     * @Date 2018/12/24 22:43
+     */
+    @RequestMapping("/MOrder_add")
+    public String addView(Model model) {
+        model.addAttribute("Nature",dictService.getDictByTypeName("C_Nature"));
+        model.addAttribute("Trade",dictService.getDictByTypeName("C_Trade"));
+        model.addAttribute("Source",dictService.getDictByTypeName("C_Source"));
+        model.addAttribute("Type",dictService.getDictByTypeName("C_Type"));
+        model.addAttribute("Region",dictService.getDictByTypeName("C_Region"));
+        return PREFIX + "MOrder_add.html";
+    }
+
+    /**
+     * 跳转到客户详情的页面
+     *
+     * @author zls
+     * @Date
+     */
+    @RequestMapping("/MOrder_info")
+    public String infoView(@RequestParam(required = false) String oNumber,Model model) {
+//        model.addAttribute("Nature",dictService.getDictByTypeName("C_Nature"));
+//        model.addAttribute("Trade",dictService.getDictByTypeName("C_Trade"));
+//        model.addAttribute("Source",dictService.getDictByTypeName("C_Source"));
+//        model.addAttribute("Type",dictService.getDictByTypeName("C_Type"));
+          List<Cost> listcost = mOrderService.getCostByoNumber(oNumber);
+          List list = new ArrayList<>();
+          //model.addAttribute("size",dictService.getDictByTypeName("Cost").size()/9+1);
+          for(int i=0;i<listcost.size()/9+1;i++){
+              List list1 = new ArrayList<>();
+              for(int j=i*9;j<i*9+9;j++){
+                  if(j==listcost.size()){
+                      break;
+                  }
+                  list1.add(listcost.get(j));
+              }
+              list.add(list1);
+          }
+          model.addAttribute("cost",list);
+          return PREFIX + "MOrder_info.html";
+    }
+
+    /**
+     * 获取订单详情
+     *
+     * @author fengshuonan
+     * @Date 2018/12/24 22:43
+     */
+    @RequestMapping("/MOrder_detail")
+    @ResponseBody
+    public ResponseData getcustomer(@RequestParam String oNumber) {
+        return ResponseData.success(mOrderService.selectMOrderByoNumber(oNumber));
+    }
 //    /**
 //     * 跳转到增加客户档案的页面
 //     *
@@ -86,7 +152,7 @@ public class MOrderController extends BaseController {
 //        model.addAttribute("Source",dictService.getDictByTypeName("C_Source"));
 //        model.addAttribute("Type",dictService.getDictByTypeName("C_Type"));
 //        model.addAttribute("Region",dictService.getDictByTypeName("C_Region"));
-//        return PREFIX + "customer_add.html";
+//        return PREFIX + "MOrder_add.html";
 //    }
 //
 //    /**
@@ -102,7 +168,7 @@ public class MOrderController extends BaseController {
 //        model.addAttribute("Source",dictService.getDictByTypeName("C_Source"));
 //        model.addAttribute("Type",dictService.getDictByTypeName("C_Type"));
 //        model.addAttribute("Region",dictService.getDictByTypeName("C_Region"));
-//        return PREFIX + "customer_info.html";
+//        return PREFIX + "MOrder_info.html";
 //    }
 //
 //
@@ -141,7 +207,7 @@ public class MOrderController extends BaseController {
 //        model.addAttribute("Source",dictService.getDictByTypeName("C_Source"));
 //        model.addAttribute("Type",dictService.getDictByTypeName("C_Type"));
 //        model.addAttribute("Region",dictService.getDictByTypeName("C_Region"));
-//        return PREFIX + "customer_edit.html";
+//        return PREFIX + "MOrder_edit.html";
 //    }
 //    /**
 //     * 获取客户详情

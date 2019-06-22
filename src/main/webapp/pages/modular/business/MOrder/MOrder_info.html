@@ -1,0 +1,158 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/business/MOrder/MOrder_info.js"]}){
+<form id="MOrderForm" lay-filter="MOrderForm" class="layui-form model-form">
+    <fieldset>
+        <legend>基本信息</legend>
+        <input name="oNumber" type="hidden"/>
+        <table width="100%" border="1" cellspacing="1">
+            <tr>
+                <td width="11.1%" align="center" >单据编号</td>
+                <td width="11.1%"><input name="oNumber"  type="text" class="layui-input" lay-verify="required" disabled required/></td>
+
+                <td width="11.1%" align="center" >订单类型</td>
+                <td width="11.1%"> <select name="cNature" lay-verify="required" lay-search="" disabled></select></td>
+                <td width="11.1%" align="center" >订单状态</td>
+                <td width="11.1%"></td>
+                <td width="11.1%" align="center" >业务员</td>
+                <td width="11.1%"><input name="salesman" type="text" class="layui-input" lay-verify="required" disabled required/></td>
+                <td  rowspan="4"></td>
+            </tr>
+            <tr>
+                <td align="center">客户名称</td>
+                <td><input name="cName" placeholder="请输入客户名称" type="text" class="layui-input" lay-verify="required" disabled required/></td>
+                <td align="center">产品名称</td>
+                <td><input name="pName" placeholder="请输入产品名称" type="text" class="layui-input" lay-verify="required" disabled required/></td></td>
+                <td align="center">产品开数</td>
+                <td><input name="pNumber" placeholder="请输入产品开数" type="text" class="layui-input" lay-verify="required" disabled required/></td></td>
+                <td align="center">产品尺寸</td>
+                <td><select name="pSize" lay-verify="required" lay-search="" disabled></select></td>
+
+            </tr>
+            <tr>
+                <td align="center">订货数量</td>
+                <td ><input name="oQquantity" placeholder="请输入客户名称" type="text" class="layui-input" lay-verify="required" disabled required/></td>
+                <td align="center">单位</td>
+                <td><select name="unit" lay-verify="required" lay-search="" disabled></select></td>
+                <td align="center">客户订单号</td>
+                <td><input name="oQquantity" placeholder="请输入客户名称" type="text" class="layui-input" lay-verify="required" disabled required/></td>
+                <td align="center">下单时间</td>
+                <td> <input id="factorydate" name="ordertime" placeholder="请输入下单时间" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/></td>
+
+            </tr>
+            <tr >
+                <td align="center">联系人</td>
+                <td><input name="contacts"  type="text" class="layui-input" lay-verify="required" disabled required/></td>
+                <td align="center">联系方式</td>
+                <td><input name="phone"  type="text" class="layui-input" lay-verify="required" disabled required/></td>
+                <td align="center">交货日期</td>
+                <td><input id="factorydate1" name="ordertime" placeholder="请输入下单时间" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/></td>
+                <td align="center">结账日期</td>
+                <td><input id="factorydate2" name="ordertime" placeholder="请输入下单时间" type="text" class="layui-input" autocomplete="off" lay-verify="required" required/></td>
+
+            </tr>
+            <tr >
+                <td align="center">印刷类型</td>
+                <td> <select name="cNature" lay-verify="required" lay-search="" disabled></select></td>
+                <td align="center">在线订单号</td>
+                <td><input name="oQquantity" placeholder="请输入客户名称" type="text" class="layui-input" lay-verify="required" disabled required/></td>
+                <td align="center">报价金额</td>
+                <td><input name="oQquantity" placeholder="请输入客户名称" type="text" class="layui-input" lay-verify="required" disabled required/></td>
+                <td align="center">选择图片</td>
+                <td colspan="1"><input type="file"></td>
+
+            </tr>
+        </table>
+
+    </fieldset>
+
+
+    <fieldset>
+        <legend>订单说明</legend>
+        <table width="100%" border="1" cellspacing="1">
+            <tr>
+                <td width="10%">产品说明</td>
+                <td width="40%"><input type="text" width="100%"></td>
+                <td width="10%">客户提供</td>
+                <td width="40%"><input type="text"></td>
+            </tr>
+            <tr>
+                <td>印刷工艺要求</td>
+                <td><input type="text"></td>
+                <td>印后工艺要求</td>
+                <td><input type="text"></td>
+            </tr>
+            <tr>
+                <td>拼晒要求</td>
+                <td><input type="text"></td>
+                <td>外发要求</td>
+                <td><input type="text"></td>
+            </tr>
+            <tr>
+                <td>送货要求</td>
+                <td><input type="text"></td>
+                <td>说明备注</td>
+                <td><input type="text"></td>
+            </tr>
+        </table>
+    </fieldset>
+
+    <fieldset>
+        <legend>生产信息</legend>
+        <table width="100%" border="1" cellspacing="1">
+            <tr>
+                <td width="10%">产品说明</td>
+                <td width="40%"><input type="text"></td>
+                <td width="10%">客户提供</td>
+                <td width="40%"><input type="text"></td>
+            </tr>
+            <tr>
+                <td>印刷工艺要求</td>
+                <td><input type="text"></td>
+                <td>印后工艺要求</td>
+                <td><input type="text"></td>
+            </tr>
+            <tr>
+                <td>拼晒要求</td>
+                <td><input type="text"></td>
+                <td>外发要求</td>
+                <td><input type="text"></td>
+            </tr>
+            <tr>
+                <td>送货要求</td>
+                <td><input type="text"></td>
+                <td>说明备注</td>
+                <td><input type="text"></td>
+            </tr>
+        </table>
+    </fieldset>
+
+    <fieldset>
+        <legend>费用信息</legend>
+        <table width="100%" border="1" cellspacing="1">
+            @for(item in cost){
+            <tr>
+                @for(item1 in item){
+                    <td width="5.5%">${item1.name}</td>
+                    <td width="5.5%">${item1.cost}</td>
+                @}
+            </tr>
+            @}
+
+            <tr>
+                <td>总金额</td>
+                <td>0</td>
+            </tr>
+        </table>
+    </fieldset>
+
+    <div class="layui-form-item text-right">
+        @if(shiro.hasPermission("/MOrder/edit")){
+        <button class="layui-btn layui-btn-primary layui-btn-normal" type="button"  id="editMOrder">编辑</button>
+        @}
+        @if(shiro.hasPermission("/MOrder/delete")){
+        <button class="layui-btn layui-btn-primary layui-btn-danger" type="button"  id="deleteMOrder">删除</button>
+        @}
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog" id="backupPage">返回</button>
+    </div>
+</form>
+
+@}
